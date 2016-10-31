@@ -15,22 +15,24 @@ for x in range(0, len(samples)):
     if x % 5 == 0:
         trimmer.append(samples[x])
 
+mmax = long(max(samples))
+mmin = long(min(samples))
+print mmax
+print mmin
+rrange = long(mmax - mmin)
+print rrange
 formatted = []
 for x in range(0, len(trimmer)):
     if x % 3 == 0:
         formatted.append([])
     v = float(trimmer[x])
-    v += 16384
-    v /= 16384
-    if x % 3 == 0:
-        v *= 360
-        v = int(v)
-    else:
-        v *= 100
-        v = int(v)
-        v %= 100
-        v = float(v)
-        v /= 100
+    v -= mmin
+    v = long(v)
+    v %= 10000
+    v = float(v) / 10000
+    v *- 0.6
+    #v /= rrange
+    print v
     formatted[len(formatted) - 1].append(v)
 
 while len(formatted[len(formatted) - 1]) < 3:
