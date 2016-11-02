@@ -9,6 +9,7 @@ import os
 def decider(val, highest):
     return highest * sqrt((sin(float(val) / pi) ** 2) + (cos(highest / (0.000001 + pi * float(val)))) ** 2)
 
+
 def sort_type(arr, type_of_sort):
     return {
         'color': sort_by_colors,
@@ -56,6 +57,7 @@ def sort_by_blue(arr):
                 arr[x] = arr[y]
                 arr[y] = temp
     return arr
+
 
 def extract_sound_data(sound_file):
     print 'EXTRACTING ' + sound_file + '.wav'
@@ -120,15 +122,14 @@ def draw_image(rgb_arr, name, file_ext, sorting='color', final_size=(2480, 2480)
     pixels = img.load()
     mixture_rgb = (255, 255, 255)
     rgb_arr = sort_type(rgb_arr, sorting)
-    for x in range(0,((dimen)**2)):
+    for x in range(0, (dimen ** 2)):
         pixels[x // dimen, x % dimen] = ((rgb_arr[x][0] + mixture_rgb[0]) // 2, (rgb_arr[x][1] + mixture_rgb[1]) // 2, (rgb_arr[x][2] + mixture_rgb[2]) // 2)
-    img.resize((2480, 2480), Image.NEAREST).save(name + '-' + sorting + '.' + file_ext)
+    img.resize(final_size, Image.NEAREST).save(name + '-' + sorting + '.' + file_ext)
     print 'EXPORTED ' + name + '-' + sorting + '.' + file_ext
 
 
 if __name__ == '__main__':
     sort_types = ['color', 'red', 'green', 'blue']
-
     name = raw_input("Enter the name of your .wav file (no extension, please): ")
     extract_sound_data(name)
     rgb_arr = process_data_file(name)
